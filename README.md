@@ -10,4 +10,4 @@ An example project for how to make ec500 c1 - Agile software development.
 * Add from the Trello here
 
 ### Tutorial Links:
-(add useful tutorail and references here)
+https://www.youtube.com/watch?v=cpANieebE2M
