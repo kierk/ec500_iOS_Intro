@@ -13,6 +13,7 @@ An example project for how to make ec500 c1 - Agile software development.
 These instructions are for creating an iOS app with a Facebook login using Xcode as the IDE and swift as the programming language.
 ####Step 1
 Start Xcode and create a new project via File -> New -> Project
+![Step 1 Screenshot](tutorial_ss/step_1.png "Step 1")
 ![Step 1 Screenshot](tutorial_ss/step_1.1.png "Step 1")
 
 
