@@ -40,11 +40,63 @@ Select the project folder which should be listed as the app name in your default
 ![Step 3](tutorial_ss/step_3.png "Step 3")
 
 Below you'll see some of our .swift code file for the app.  A lot of this will be generated for you automatically on the creation of the project and you will notice the code is a lot like python.  If you are interested in learning swift in depth I highly recommend the following as both a walkthrough and a reference:
+
 https://learnxinyminutes.com/docs/swift/
+
 What is notable on this screen is to make sure and import the FBSDKCoreKit.  If you are interested in it parse through the code and you will see it reads almost like plain text.
+
+The important code is the use of FBSDK in func application:
+
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Override point for customization after application launch.
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+}
+
+```
+
 ![Step 4](tutorial_ss/step_4.png "Step 4")
 
 On our ViewController.swift you will see more of our front end code including landing screens when interacting with our app.  All code is opensource and can be found in this repository.
+
+The significant code here is all that refers and calls to the FB login library:
+
+```swift
+        if (FBSDKAccessToken.currentAccessToken() == nil){
+            print("Not logged in..")
+        }
+        else{
+            print("Logged in..")
+        }
+        
+        let loginButton = FBSDKLoginButton()
+        loginButton.readPermissions = ["public_profile", "email", "user_friends"]
+        loginButton.center = self.view.center
+        
+        loginButton.delegate = self
+        
+        self.view.addSubview(loginButton)
+```
+
+as well as..
+
+```swift
+    //Facebook Login
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        if error == nil{
+            print("Login complete")
+            self.performSegueWithIdentifier("showNew", sender: self)
+        }
+        else{
+            print(error.localizedDescription)
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("User logged out...")
+    }
+```
+
 ![Step 5](tutorial_ss/step_5.png "Step 5")
 
 Another notable feature of the Xcode IDE is the console in the lower right corner.  Before you go into full emulation mode for testing you will be able to do basic debugging and testing using the console i/o here.
@@ -56,7 +108,7 @@ Through the .storyboard of your project you can get a little bit more of a graph
 Another slightly better view of the storyboard..
 ![Step 8](tutorial_ss/step_8.png "Step 8")
 
-When your ready to test out start up the iOS device emulator.  Select which device you want to emulate and enjoy the mock-up iPhone screen.  Here is ours:
+When you're ready to test out start up the iOS device emulator.  Select which device you want to emulate and enjoy the mock-up iPhone screen.  Here is ours:
 ![Step 9](tutorial_ss/step_9.png "Step 9")
 
 When you click the sign-in on facebook button the app will either call out to the FB app if you have it or take you to a facebook preferences window in your safari app to have you authenticate and log-in:
@@ -77,5 +129,6 @@ And finally, you will see that our test guinea pig Max has successfully authenti
 So that is it! After this is all set you can now design your sweet apps with Facebook authentication!! You're welcome!!
 
 ### Additional Tutorial Links:
-https://www.youtube.com/watch?v=cpANieebE2M
-There is also a great tutorial when you first sign up for your unique iOS developer code
+
+* Youtube tutorial: https://www.youtube.com/watch?v=cpANieebE2M
+* There is also a great tutorial when you first sign up for your unique iOS developer code
